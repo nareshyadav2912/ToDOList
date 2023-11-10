@@ -8,12 +8,17 @@ const database = getDatabase(app)
 const lstDb = ref(database, "shoppingList")
 console.log(app)
 const ele = document.getElementById("input");
-const add = document.getElementById("btn");     
+const add = document.getElementById("btn");
 const shlist = document.getElementById("list")
 add.addEventListener("click", function () {
     let val = ele.value;
-    push(lstDb, val)
-    clearInput();
+    if(val==""){
+        alert("You Can't Add Empty Field.")
+    }
+    else{
+        push(lstDb, val)
+        clearInput();
+    }
 })
 
 onValue(lstDb, function (snapshot) {
