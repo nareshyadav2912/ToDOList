@@ -10,15 +10,20 @@ console.log(app)
 const ele = document.getElementById("input");
 const add = document.getElementById("btn");
 const shlist = document.getElementById("list")
+const status=document.getElementById("status")
+var totalCount=0;
+var remCount=0;
 add.addEventListener("click", function () {
     let val = ele.value;
     if(val==""){
-        alert("You Can't Add Empty Field.")
+        alert("Not Allowed to give empty task!!.")
     }
     else{
         push(lstDb, val)
         clearInput();
+        totalCount+=1;
     }
+    status.innerHTML="Current Pending tasks are: "+totalCount;
 })
 
 onValue(lstDb, function (snapshot) {
@@ -33,9 +38,8 @@ onValue(lstDb, function (snapshot) {
         }
     }
     else{
-        shlist.innerHTML="Oooo Noo,Your cart is Empty!Add it."
+        shlist.innerHTML="Great Job!! Hope You have done your all tasks!!"
     }
-
 })
 function clearInput() {
     ele.value = ""
@@ -49,6 +53,8 @@ function addItemLst(val) {
     newEle.addEventListener("click", function () {
         let loc = ref(database, `shoppingList/${itemId}`)
         remove(loc);
+        remCount+=1
+        status.innerHTML="You have Completed "+remCount;
     })
     shlist.append(newEle)
     //shlist.innerHTML+=`<li>${val}</li>`
