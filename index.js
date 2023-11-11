@@ -38,7 +38,9 @@ onValue(lstDb, function (snapshot) {
         }
     }
     else{
-        shlist.innerHTML="Great Job!! Hope You have done your all tasks!!"
+        shlist.innerHTML="Great Job!! Get back and Add More."
+        totalCount=0;
+        //remCount=0;
     }
 })
 function clearInput() {
@@ -53,8 +55,13 @@ function addItemLst(val) {
     newEle.addEventListener("click", function () {
         let loc = ref(database, `shoppingList/${itemId}`)
         remove(loc);
-        remCount+=1
-        status.innerHTML="You have Completed "+remCount;
+        totalCount-=1
+        if(totalCount==-1){
+            status.innerHTML="Great You have Completed All."
+        }
+        else{
+            status.innerHTML="You have Completed "+totalCount;
+        }
     })
     shlist.append(newEle)
     //shlist.innerHTML+=`<li>${val}</li>`
