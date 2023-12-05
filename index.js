@@ -55,12 +55,13 @@ function addItemLst(val) {
     newEle.addEventListener("click", function () {
         let loc = ref(database, `shoppingList/${itemId}`)
         remove(loc);
-        totalCount-=1
-        if(totalCount==-1){
+        remCount+=1;
+        if(remCount-1==totalCount){
             status.innerHTML="Great You have Completed All."
+            remCount=0;
         }
         else{
-            status.innerHTML="You have Completed "+totalCount;
+            status.innerHTML="You have Completed "+remCount;
         }
     })
     shlist.append(newEle)
